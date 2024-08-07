@@ -56,18 +56,51 @@ namespace saft_sender
 
             try
             {
+                //PARSING
                 if (string.IsNullOrEmpty(nif) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(year) || string.IsNullOrEmpty(month))
                 {
                     MessageBox.Show("Erro: Deve preencher todos os campos (NIF, password, ano e mês)");
                     return;
                 }
-
+                if (nif.Length != 9)
+                {
+                    MessageBox.Show("Erro: O NIF tem que conter 9 dígitos.");
+                    return;
+                }
+                if (year.Length != 4)
+                {
+                    MessageBox.Show("Erro: O ano tem que conter 4 dígitos.");
+                    return;
+                }
+                try
+                {
+                    int month_number = int.Parse(month);
+                    if (month_number > 12 || month_number < 1)
+                    {
+                        MessageBox.Show("Erro: O mês deve estar no intervalo entre 1 e 12");
+                        return;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Erro: O mês deve ser um número!");
+                    return;
+                }
                 if (string.IsNullOrEmpty(saft_file_path))
+                {
                     MessageBox.Show("Erro: Não selecionou nenhum ficheiro saft!");
+                    return;
+                }
                 if (string.IsNullOrEmpty(jar_file_path))
+                {
                     MessageBox.Show("Erro: Não efetuou o download do ficheiro JAR!");
+                    return;
+                }
                 if (string.IsNullOrEmpty(resume_saft_path))
+                {
                     MessageBox.Show("Erro: Não selecionou um caminho para guardar o ficheiro resumido!");
+                    return;
+                }
 
                 string cmd = $"-jar \"{jar_file_path}\" -n {nif} -p {password} -a {year} -m {month} -op enviar -i \"{saft_file_path}\" -o \"{resume_saft_path}\"";
                 MessageBox.Show("A INICIAR");
