@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace saft_sender
 {
@@ -68,28 +69,39 @@ namespace saft_sender
                 if (string.IsNullOrEmpty(resume_saft_path))
                     MessageBox.Show("Erro: Não selecionou um caminho para guardar o ficheiro resumido!");
 
-                string cmd = "java -jar \"{jar_file_path}\" -n {nif} -p {password} -a {year} -m {month} -op enviar -i \"{saft_file_path}\" -o \"{resume_saft_path}\"";
+                string cmd = $"-jar \"{jar_file_path}\" -n {nif} -p {password} -a {year} -m {month} -op enviar -i \"{saft_file_path}\" -o \"{resume_saft_path}\"";
+                MessageBox.Show("A INICIAR");
             
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
-                    FileName = "cmd.exe",
+                    FileName = "java",
                     Arguments = cmd,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
                 };
 
-                using (Process process = Process.Start(startInfo))
-                {
-                    string output = process.StandardOutput.ReadToEnd();
-                    process.WaitForExit();
 
-                    MessageBox.Show("Saft enviado!");
+                using (Process process = new Process())
+                {
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+                    process.WaitForExit();
+                    if (!string.IsNullOrEmpty(output))
+                        MessageBox.Show("Output: " + output);
+                    else if (!string.IsNullOrEmpty(error))
+                        MessageBox.Show("ERROR: " + error);
+                    else
+                        MessageBox.Show("Nothing has been done.");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("An Error ocurred!");
+                MessageBox.Show("An Error ocurred!" + ex);
             }
 
         }
@@ -148,5 +160,9 @@ namespace saft_sender
             this.Close();
         }
 
+        private void loading_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

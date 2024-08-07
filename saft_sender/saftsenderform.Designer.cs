@@ -46,6 +46,7 @@
             this.title2 = new System.Windows.Forms.Label();
             this.downloadjar_button = new System.Windows.Forms.Button();
             this.resumesaft_button = new System.Windows.Forms.Button();
+            this.loading = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -218,6 +219,15 @@
             this.resumesaft_button.UseVisualStyleBackColor = true;
             this.resumesaft_button.Click += new System.EventHandler(this.resumesaft_button_Click);
             // 
+            // loading
+            // 
+            this.loading.Location = new System.Drawing.Point(292, 279);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(322, 23);
+            this.loading.TabIndex = 19;
+            this.loading.Click += new System.EventHandler(this.loading_Click);
+            this.loading.Visible = false;
+            // 
             // SaftSenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,6 +236,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(797, 485);
+            this.Controls.Add(this.loading);
             this.Controls.Add(this.resumesaft_button);
             this.Controls.Add(this.downloadjar_button);
             this.Controls.Add(this.title2);
@@ -270,6 +281,7 @@
         private System.Windows.Forms.Label title2;
         private System.Windows.Forms.Button downloadjar_button;
         private System.Windows.Forms.Button resumesaft_button;
+        private System.Windows.Forms.ProgressBar loading;
     }
 }
 
