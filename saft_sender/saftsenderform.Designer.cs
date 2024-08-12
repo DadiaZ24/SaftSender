@@ -1,4 +1,6 @@
-﻿namespace saft_sender
+﻿using System;
+
+namespace saft_sender
 {
     partial class SaftSenderForm
     {
@@ -37,16 +39,15 @@
             this.nif_txtbox = new System.Windows.Forms.TextBox();
             this.pass_txtbox = new System.Windows.Forms.TextBox();
             this.pass = new System.Windows.Forms.Label();
-            this.year_txtbox = new System.Windows.Forms.TextBox();
-            this.year = new System.Windows.Forms.Label();
-            this.month_txtbox = new System.Windows.Forms.TextBox();
-            this.month = new System.Windows.Forms.Label();
+            this.year_label = new System.Windows.Forms.Label();
+            this.month_label = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.title1 = new System.Windows.Forms.Label();
             this.title2 = new System.Windows.Forms.Label();
             this.downloadjar_button = new System.Windows.Forms.Button();
             this.resumesaft_button = new System.Windows.Forms.Button();
-            this.loading = new System.Windows.Forms.ProgressBar();
+            this.year_combobox = new System.Windows.Forms.ComboBox();
+            this.month_combobox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,43 +126,27 @@
             this.pass.TabIndex = 8;
             this.pass.Text = "Senha AT";
             // 
-            // year_txtbox
+            // year_label
             // 
-            this.year_txtbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.year_txtbox.Location = new System.Drawing.Point(113, 224);
-            this.year_txtbox.Name = "year_txtbox";
-            this.year_txtbox.Size = new System.Drawing.Size(135, 27);
-            this.year_txtbox.TabIndex = 11;
+            this.year_label.AutoSize = true;
+            this.year_label.BackColor = System.Drawing.SystemColors.Control;
+            this.year_label.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.year_label.Location = new System.Drawing.Point(58, 227);
+            this.year_label.Name = "year_label";
+            this.year_label.Size = new System.Drawing.Size(39, 18);
+            this.year_label.TabIndex = 10;
+            this.year_label.Text = "Ano";
             // 
-            // year
+            // month_label
             // 
-            this.year.AutoSize = true;
-            this.year.BackColor = System.Drawing.SystemColors.Control;
-            this.year.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.year.Location = new System.Drawing.Point(58, 227);
-            this.year.Name = "year";
-            this.year.Size = new System.Drawing.Size(39, 18);
-            this.year.TabIndex = 10;
-            this.year.Text = "Ano";
-            // 
-            // month_txtbox
-            // 
-            this.month_txtbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.month_txtbox.Location = new System.Drawing.Point(113, 275);
-            this.month_txtbox.Name = "month_txtbox";
-            this.month_txtbox.Size = new System.Drawing.Size(135, 27);
-            this.month_txtbox.TabIndex = 13;
-            // 
-            // month
-            // 
-            this.month.AutoSize = true;
-            this.month.BackColor = System.Drawing.SystemColors.Control;
-            this.month.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.month.Location = new System.Drawing.Point(58, 278);
-            this.month.Name = "month";
-            this.month.Size = new System.Drawing.Size(40, 18);
-            this.month.TabIndex = 12;
-            this.month.Text = "Mês";
+            this.month_label.AutoSize = true;
+            this.month_label.BackColor = System.Drawing.SystemColors.Control;
+            this.month_label.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.month_label.Location = new System.Drawing.Point(58, 278);
+            this.month_label.Name = "month_label";
+            this.month_label.Size = new System.Drawing.Size(40, 18);
+            this.month_label.TabIndex = 12;
+            this.month_label.Text = "Mês";
             // 
             // pictureBox1
             // 
@@ -219,14 +204,44 @@
             this.resumesaft_button.UseVisualStyleBackColor = true;
             this.resumesaft_button.Click += new System.EventHandler(this.resumesaft_button_Click);
             // 
-            // loading
+            // year_combobox
             // 
-            this.loading.Location = new System.Drawing.Point(292, 279);
-            this.loading.Name = "loading";
-            this.loading.Size = new System.Drawing.Size(322, 23);
-            this.loading.TabIndex = 19;
-            this.loading.Click += new System.EventHandler(this.loading_Click);
-            this.loading.Visible = false;
+            this.year_combobox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.year_combobox.FormattingEnabled = true;
+            this.year_combobox.Location = new System.Drawing.Point(113, 224);
+            this.year_combobox.Name = "year_combobox";
+            this.year_combobox.Size = new System.Drawing.Size(77, 26);
+            this.year_combobox.TabIndex = 19;
+            this.year_combobox.SelectedIndexChanged += new System.EventHandler(this.year_combobox_SelectedIndexChanged);
+            int currentyear = DateTime.Now.Year;
+
+            for (int selectyear = currentyear; selectyear >= 2020; selectyear--)
+            {
+                this.year_combobox.Items.Add(selectyear.ToString());
+            }
+            // 
+            // month_combobox
+            // 
+            this.month_combobox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.month_combobox.FormattingEnabled = true;
+            this.month_combobox.Items.AddRange(new object[] {
+            "01-Janeiro",
+            "02-Fevereiro",
+            "03-Março",
+            "04-Abril",
+            "05-Maio",
+            "06-Junho",
+            "07-Julho",
+            "08-Agosto",
+            "09-Setembro",
+            "10-Outubro",
+            "11-Novembro",
+            "12-Dezembro"});
+            this.month_combobox.Location = new System.Drawing.Point(113, 275);
+            this.month_combobox.Name = "month_combobox";
+            this.month_combobox.Size = new System.Drawing.Size(135, 26);
+            this.month_combobox.TabIndex = 20;
+            this.month_combobox.SelectedIndexChanged += new System.EventHandler(this.month_combobox_SelectedIndexChanged);
             // 
             // SaftSenderForm
             // 
@@ -236,15 +251,14 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(797, 485);
-            this.Controls.Add(this.loading);
+            this.Controls.Add(this.month_combobox);
+            this.Controls.Add(this.year_combobox);
             this.Controls.Add(this.resumesaft_button);
             this.Controls.Add(this.downloadjar_button);
             this.Controls.Add(this.title2);
             this.Controls.Add(this.title1);
-            this.Controls.Add(this.month_txtbox);
-            this.Controls.Add(this.month);
-            this.Controls.Add(this.year_txtbox);
-            this.Controls.Add(this.year);
+            this.Controls.Add(this.month_label);
+            this.Controls.Add(this.year_label);
             this.Controls.Add(this.pass_txtbox);
             this.Controls.Add(this.pass);
             this.Controls.Add(this.nif_txtbox);
@@ -272,16 +286,15 @@
         private System.Windows.Forms.TextBox nif_txtbox;
         private System.Windows.Forms.TextBox pass_txtbox;
         private System.Windows.Forms.Label pass;
-        private System.Windows.Forms.TextBox year_txtbox;
-        private System.Windows.Forms.Label year;
-        private System.Windows.Forms.TextBox month_txtbox;
-        private System.Windows.Forms.Label month;
+        private System.Windows.Forms.Label year_label;
+        private System.Windows.Forms.Label month_label;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label title1;
         private System.Windows.Forms.Label title2;
         private System.Windows.Forms.Button downloadjar_button;
         private System.Windows.Forms.Button resumesaft_button;
-        private System.Windows.Forms.ProgressBar loading;
+        private System.Windows.Forms.ComboBox year_combobox;
+        private System.Windows.Forms.ComboBox month_combobox;
     }
 }
 
