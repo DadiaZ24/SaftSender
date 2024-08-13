@@ -91,7 +91,7 @@ namespace saft_sender
                     return;
                 }
 
-                string cmd = $"-jar {jar_file_path} -n {nif} -p {password} -a {year} -m {month} -op enviar -i \"{saft_file_path}\" -o \"{resume_saft_path}\"";
+                string cmd = $"-jar {jar_file_path} -n {nif} -p {password} -a {year} -m {month} -op enviar -i \"{saft_file_path}\" -md \"{resume_saft_path}\"";
             
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
