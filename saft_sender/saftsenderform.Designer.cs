@@ -48,6 +48,9 @@ namespace saft_sender
             this.resumesaft_button = new System.Windows.Forms.Button();
             this.year_combobox = new System.Windows.Forms.ComboBox();
             this.month_combobox = new System.Windows.Forms.ComboBox();
+            this.abrirsaft_path = new System.Windows.Forms.Label();
+            this.resume_path = new System.Windows.Forms.Label();
+            this.jar_path = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,7 +79,7 @@ namespace saft_sender
             // opensaft_button
             // 
             this.opensaft_button.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.opensaft_button.Location = new System.Drawing.Point(113, 325);
+            this.opensaft_button.Location = new System.Drawing.Point(18, 313);
             this.opensaft_button.Name = "opensaft_button";
             this.opensaft_button.Size = new System.Drawing.Size(89, 34);
             this.opensaft_button.TabIndex = 5;
@@ -185,7 +188,7 @@ namespace saft_sender
             // downloadjar_button
             // 
             this.downloadjar_button.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.downloadjar_button.Location = new System.Drawing.Point(46, 378);
+            this.downloadjar_button.Location = new System.Drawing.Point(18, 391);
             this.downloadjar_button.Name = "downloadjar_button";
             this.downloadjar_button.Size = new System.Drawing.Size(89, 34);
             this.downloadjar_button.TabIndex = 17;
@@ -196,7 +199,7 @@ namespace saft_sender
             // resumesaft_button
             // 
             this.resumesaft_button.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resumesaft_button.Location = new System.Drawing.Point(176, 378);
+            this.resumesaft_button.Location = new System.Drawing.Point(18, 353);
             this.resumesaft_button.Name = "resumesaft_button";
             this.resumesaft_button.Size = new System.Drawing.Size(89, 34);
             this.resumesaft_button.TabIndex = 18;
@@ -213,12 +216,6 @@ namespace saft_sender
             this.year_combobox.Size = new System.Drawing.Size(77, 26);
             this.year_combobox.TabIndex = 19;
             this.year_combobox.SelectedIndexChanged += new System.EventHandler(this.year_combobox_SelectedIndexChanged);
-            int currentyear = DateTime.Now.Year;
-
-            for (int selectyear = currentyear; selectyear >= 2020; selectyear--)
-            {
-                this.year_combobox.Items.Add(selectyear.ToString());
-            }
             // 
             // month_combobox
             // 
@@ -243,6 +240,40 @@ namespace saft_sender
             this.month_combobox.TabIndex = 20;
             this.month_combobox.SelectedIndexChanged += new System.EventHandler(this.month_combobox_SelectedIndexChanged);
             // 
+            // abrirsaft_path
+            // 
+            this.abrirsaft_path.AutoSize = true;
+            this.abrirsaft_path.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.abrirsaft_path.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.abrirsaft_path.Location = new System.Drawing.Point(111, 335);
+            this.abrirsaft_path.Name = "abrirsaft_path";
+            this.abrirsaft_path.Size = new System.Drawing.Size(33, 12);
+            this.abrirsaft_path.TabIndex = 21;
+            this.abrirsaft_path.Text = "teste";
+            this.abrirsaft_path.Click += new System.EventHandler(this.abrirsaft_path_Click);
+            // 
+            // resume_path
+            // 
+            this.resume_path.AutoSize = true;
+            this.resume_path.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.resume_path.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resume_path.Location = new System.Drawing.Point(111, 375);
+            this.resume_path.Name = "resume_path";
+            this.resume_path.Size = new System.Drawing.Size(33, 12);
+            this.resume_path.TabIndex = 22;
+            this.resume_path.Text = "teste";
+            // 
+            // jar_path
+            // 
+            this.jar_path.AutoSize = true;
+            this.jar_path.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.jar_path.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.jar_path.Location = new System.Drawing.Point(111, 413);
+            this.jar_path.Name = "jar_path";
+            this.jar_path.Size = new System.Drawing.Size(33, 12);
+            this.jar_path.TabIndex = 23;
+            this.jar_path.Text = "teste";
+            // 
             // SaftSenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,6 +282,9 @@ namespace saft_sender
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(797, 485);
+            this.Controls.Add(this.jar_path);
+            this.Controls.Add(this.resume_path);
+            this.Controls.Add(this.abrirsaft_path);
             this.Controls.Add(this.month_combobox);
             this.Controls.Add(this.year_combobox);
             this.Controls.Add(this.resumesaft_button);
@@ -295,6 +329,9 @@ namespace saft_sender
         private System.Windows.Forms.Button resumesaft_button;
         private System.Windows.Forms.ComboBox year_combobox;
         private System.Windows.Forms.ComboBox month_combobox;
+        private System.Windows.Forms.Label abrirsaft_path;
+        private System.Windows.Forms.Label resume_path;
+        private System.Windows.Forms.Label jar_path;
     }
 }
 

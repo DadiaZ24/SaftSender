@@ -44,10 +44,8 @@ namespace saft_sender
                 saft_file_path = opensaft_dialog.FileName;
                 if (Path.GetExtension(saft_file_path).Equals(".xml", StringComparison.OrdinalIgnoreCase))
                 {
-                    opensaft_button.Text = saft_file_path;
-
                     saft_file_name = Path.GetFileName(saft_file_path);
-                    opensaft_button.Text = saft_file_name;
+                    abrirsaft_path.Text = saft_file_name;
                 }
                 else
                     error_message_box("O ficheiro não é do tipo xml!");
@@ -200,6 +198,7 @@ namespace saft_sender
                     jar_file_path = Path.Combine(folderBrowserDialog.SelectedPath, "FACTEMICLI-2.8.4-60332-cmdClient.jar");
 
                     await DownloadJarFile(url, jar_file_path);
+                    jar_path.Text = jar_file_path;
                 }
             }
         }
@@ -215,7 +214,7 @@ namespace saft_sender
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     resume_saft_path = Path.Combine(folderBrowserDialog.SelectedPath, "resumido_" + saft_file_name);
-                    resumesaft_button.Text = "resumido_" + saft_file_name;
+                    resume_path.Text = "resumido_" + saft_file_name;
                 }
             }
         }
@@ -285,6 +284,11 @@ namespace saft_sender
                 else if (month_combobox.SelectedItem.ToString().Contains("12"))
                     month = "12";
             }
+        }
+
+        private void abrirsaft_path_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
