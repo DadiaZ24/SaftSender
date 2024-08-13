@@ -179,9 +179,23 @@ namespace saft_sender
                             else
                             {
                                 if (!string.IsNullOrEmpty(warning))
+                                {
                                     MessageBox.Show("Succeso no envio!\nTotal de Faturas: {totalfaturas}\nTotal de Créditos: {totalcreditos}\nTotal de Débitos: {totaldebitos}\nAtenção: {warning}\nNome do Ficheiro: {nomeficheiro}\nData de Envio: {createdate}");
+                                    nif_txtbox.Text = null;
+                                    pass_txtbox.Text = null;
+                                    saft_file_path = null;
+                                    saft_file_name = null;
+                                    abrirsaft_path = null;
+                                }
                                 else
+                                {
                                     MessageBox.Show("Succeso no envio!\nTotal de Faturas: {totalfaturas}\nTotal de Créditos: {totalcreditos}\nTotal de Débitos: {totaldebitos}\nNome do Ficheiro: {nomeficheiro}\nData de Envio: {createdate}");
+                                    nif_txtbox.Text = null;
+                                    pass_txtbox.Text = null;
+                                    saft_file_path = null;
+                                    saft_file_name = null;
+                                    abrirsaft_path = null;
+                                }
                             }
                         }
                         else if (output.Contains("Exception in thread"))
@@ -308,6 +322,16 @@ namespace saft_sender
         }
 
         private void abrirsaft_path_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

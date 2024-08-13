@@ -51,6 +51,7 @@ namespace saft_sender
             this.abrirsaft_path = new System.Windows.Forms.Label();
             this.resume_path = new System.Windows.Forms.Label();
             this.jar_path = new System.Windows.Forms.Label();
+            this.clearsaft_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,7 +135,7 @@ namespace saft_sender
             this.year_label.AutoSize = true;
             this.year_label.BackColor = System.Drawing.SystemColors.Control;
             this.year_label.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.year_label.Location = new System.Drawing.Point(58, 227);
+            this.year_label.Location = new System.Drawing.Point(58, 220);
             this.year_label.Name = "year_label";
             this.year_label.Size = new System.Drawing.Size(39, 18);
             this.year_label.TabIndex = 10;
@@ -145,7 +146,7 @@ namespace saft_sender
             this.month_label.AutoSize = true;
             this.month_label.BackColor = System.Drawing.SystemColors.Control;
             this.month_label.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.month_label.Location = new System.Drawing.Point(58, 278);
+            this.month_label.Location = new System.Drawing.Point(58, 266);
             this.month_label.Name = "month_label";
             this.month_label.Size = new System.Drawing.Size(40, 18);
             this.month_label.TabIndex = 12;
@@ -160,6 +161,7 @@ namespace saft_sender
             this.pictureBox1.Size = new System.Drawing.Size(482, 473);
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // title1
             // 
@@ -211,17 +213,11 @@ namespace saft_sender
             // 
             this.year_combobox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.year_combobox.FormattingEnabled = true;
-            this.year_combobox.Location = new System.Drawing.Point(113, 224);
+            this.year_combobox.Location = new System.Drawing.Point(113, 217);
             this.year_combobox.Name = "year_combobox";
             this.year_combobox.Size = new System.Drawing.Size(77, 26);
             this.year_combobox.TabIndex = 19;
             this.year_combobox.SelectedIndexChanged += new System.EventHandler(this.year_combobox_SelectedIndexChanged);
-            int currentyear = DateTime.Now.Year;
-
-            for (int selectyear = currentyear; selectyear >= 2020; selectyear--)
-            {
-                this.year_combobox.Items.Add(selectyear.ToString());
-            }
             // 
             // month_combobox
             // 
@@ -240,23 +236,11 @@ namespace saft_sender
             "10-Outubro",
             "11-Novembro",
             "12-Dezembro"});
-            this.month_combobox.Location = new System.Drawing.Point(113, 275);
+            this.month_combobox.Location = new System.Drawing.Point(113, 263);
             this.month_combobox.Name = "month_combobox";
             this.month_combobox.Size = new System.Drawing.Size(135, 26);
             this.month_combobox.TabIndex = 20;
             this.month_combobox.SelectedIndexChanged += new System.EventHandler(this.month_combobox_SelectedIndexChanged);
-            // 
-            // abrirsaft_path
-            // 
-            this.abrirsaft_path.AutoSize = true;
-            this.abrirsaft_path.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.abrirsaft_path.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.abrirsaft_path.Location = new System.Drawing.Point(111, 335);
-            this.abrirsaft_path.Name = "abrirsaft_path";
-            this.abrirsaft_path.Size = new System.Drawing.Size(33, 12);
-            this.abrirsaft_path.TabIndex = 21;
-            this.abrirsaft_path.Text = "";
-            this.abrirsaft_path.Click += new System.EventHandler(this.abrirsaft_path_Click);
             // 
             // resume_path
             // 
@@ -265,9 +249,8 @@ namespace saft_sender
             this.resume_path.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resume_path.Location = new System.Drawing.Point(111, 375);
             this.resume_path.Name = "resume_path";
-            this.resume_path.Size = new System.Drawing.Size(33, 12);
+            this.resume_path.Size = new System.Drawing.Size(0, 12);
             this.resume_path.TabIndex = 22;
-            this.resume_path.Text = "";
             // 
             // jar_path
             // 
@@ -276,9 +259,31 @@ namespace saft_sender
             this.jar_path.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.jar_path.Location = new System.Drawing.Point(111, 413);
             this.jar_path.Name = "jar_path";
-            this.jar_path.Size = new System.Drawing.Size(33, 12);
+            this.jar_path.Size = new System.Drawing.Size(0, 12);
             this.jar_path.TabIndex = 23;
-            this.jar_path.Text = "";
+            // 
+            // abrirsaft_path
+            // 
+            this.abrirsaft_path.AutoSize = true;
+            this.abrirsaft_path.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.abrirsaft_path.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.abrirsaft_path.Location = new System.Drawing.Point(111, 335);
+            this.abrirsaft_path.Name = "abrirsaft_path";
+            this.abrirsaft_path.Size = new System.Drawing.Size(0, 12);
+            this.abrirsaft_path.TabIndex = 21;
+            this.abrirsaft_path.Click += new System.EventHandler(this.abrirsaft_path_Click);
+            // 
+            // clearsaft_button
+            // 
+            this.clearsaft_button.BackColor = System.Drawing.Color.Transparent;
+            this.clearsaft_button.FlatAppearance.BorderSize = 0;
+            this.clearsaft_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clearsaft_button.Image = global::saft_sender.Properties.Resources.other_x_icon_2048x2043_ueafpzlh__2_;
+            this.clearsaft_button.Location = new System.Drawing.Point(316, 322);
+            this.clearsaft_button.Name = "clearsaft_button";
+            this.clearsaft_button.Size = new System.Drawing.Size(17, 17);
+            this.clearsaft_button.TabIndex = 24;
+            this.clearsaft_button.UseVisualStyleBackColor = false;
             // 
             // SaftSenderForm
             // 
@@ -288,6 +293,7 @@ namespace saft_sender
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(797, 485);
+            this.Controls.Add(this.clearsaft_button);
             this.Controls.Add(this.jar_path);
             this.Controls.Add(this.resume_path);
             this.Controls.Add(this.abrirsaft_path);
@@ -338,6 +344,7 @@ namespace saft_sender
         private System.Windows.Forms.Label abrirsaft_path;
         private System.Windows.Forms.Label resume_path;
         private System.Windows.Forms.Label jar_path;
+        private System.Windows.Forms.Button clearsaft_button;
     }
 }
 
