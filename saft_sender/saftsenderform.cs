@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace saft_sender
@@ -164,7 +165,25 @@ namespace saft_sender
                         else if (output.Contains("<response code=\"-666\">"))
                             MessageBox.Show("ERRO: Ocorreu um erro.");
                         else if (output.Contains("<response code=\"200\">"))
-                            MessageBox.Show("Succeso no envio!");
+                        {
+                            XDocument xdoc = XDocument.Parse(output);
+                            string totalfaturas = xdoc.Root.Element("totalFaturas").Value;
+                            string totalcreditos = xdoc.Root.Element("totalCreditos").Value;
+                            string totaldebitos = xdoc.Root.Element("totalDebitos").Value;
+                            string warning = xdoc.Root.Element("warning").Value;
+                            string nomeficheiro = xdoc.Root.Element("nomeFicheiro").Value;
+                            string createdate = xdoc.Root.Element("createdDate").Value;
+
+                            if (string.IsNullOrEmpty(totalfaturas) || string.IsNullOrEmpty(totalcreditos) || string.IsNullOrEmpty(totaldebitos))
+                                error_message_box("Apesar do sucesso no envio, houve um problema em obter o output esperado.");
+                            else
+                            {
+                                if (!string.IsNullOrEmpty(warning))
+                                    MessageBox.Show("Succeso no envio!\nTotal de Faturas: {totalfaturas}\nTotal de Créditos: {totalcreditos}\nTotal de Débitos: {totaldebitos}\nAtenção: {warning}\nNome do Ficheiro: {nomeficheiro}\nData de Envio: {createdate}");
+                                else
+                                    MessageBox.Show("Succeso no envio!\nTotal de Faturas: {totalfaturas}\nTotal de Créditos: {totalcreditos}\nTotal de Débitos: {totaldebitos}\nNome do Ficheiro: {nomeficheiro}\nData de Envio: {createdate}");
+                            }
+                        }
                         else if (output.Contains("Exception in thread"))
                             MessageBox.Show("ERRO: Há um problema com o seu ficheiro saft. Contacte o desenvolvedor deste programa para mais informações.");
                     }
@@ -192,6 +211,8 @@ namespace saft_sender
         {
            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
             {
+                folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
+                folderBrowserDialog.SelectedPath = @"\\srvfiscomelres\OneDrive\basededados";
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     string url = "https://faturas.portaldasfinancas.gov.pt/factemipf_static/java/FACTEMICLI-2.8.4-60332-cmdClient.jar";
