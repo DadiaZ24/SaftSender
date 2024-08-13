@@ -216,6 +216,12 @@ namespace saft_sender
             this.year_combobox.Size = new System.Drawing.Size(77, 26);
             this.year_combobox.TabIndex = 19;
             this.year_combobox.SelectedIndexChanged += new System.EventHandler(this.year_combobox_SelectedIndexChanged);
+            int currentyear = DateTime.Now.Year;
+
+            for (int selectyear = currentyear; selectyear >= 2020; selectyear--)
+            {
+                this.year_combobox.Items.Add(selectyear.ToString());
+            }
             // 
             // month_combobox
             // 
@@ -249,7 +255,7 @@ namespace saft_sender
             this.abrirsaft_path.Name = "abrirsaft_path";
             this.abrirsaft_path.Size = new System.Drawing.Size(33, 12);
             this.abrirsaft_path.TabIndex = 21;
-            this.abrirsaft_path.Text = "teste";
+            this.abrirsaft_path.Text = "";
             this.abrirsaft_path.Click += new System.EventHandler(this.abrirsaft_path_Click);
             // 
             // resume_path
@@ -261,7 +267,7 @@ namespace saft_sender
             this.resume_path.Name = "resume_path";
             this.resume_path.Size = new System.Drawing.Size(33, 12);
             this.resume_path.TabIndex = 22;
-            this.resume_path.Text = "teste";
+            this.resume_path.Text = "";
             // 
             // jar_path
             // 
@@ -272,7 +278,7 @@ namespace saft_sender
             this.jar_path.Name = "jar_path";
             this.jar_path.Size = new System.Drawing.Size(33, 12);
             this.jar_path.TabIndex = 23;
-            this.jar_path.Text = "teste";
+            this.jar_path.Text = "";
             // 
             // SaftSenderForm
             // 
