@@ -218,6 +218,12 @@ namespace saft_sender
             this.year_combobox.Size = new System.Drawing.Size(77, 26);
             this.year_combobox.TabIndex = 19;
             this.year_combobox.SelectedIndexChanged += new System.EventHandler(this.year_combobox_SelectedIndexChanged);
+            int currentyear = DateTime.Now.Year;
+
+            for (int selectyear = currentyear; selectyear >= 2020; selectyear--)
+            {
+                this.year_combobox.Items.Add(selectyear.ToString());
+            }
             // 
             // month_combobox
             // 
