@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="saft_sender.exe" size="2037216">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="saft_sender.exe" size="2299872">
       <assemblyIdentity name="saft_sender" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ITDy4HYGN4WP4Bn9nxWhatnZZ33LNUTe2wjZ7e6x/KM=</dsig:DigestValue>
+        <dsig:DigestValue>GBoPnYFlGdS8p8ozbJ0wFFj8aGPdMCsDKJZy3NjOVjo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

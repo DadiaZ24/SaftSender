@@ -217,6 +217,7 @@ namespace saft_sender
             this.year_combobox.Size = new System.Drawing.Size(77, 26);
             this.year_combobox.TabIndex = 19;
             this.year_combobox.SelectedIndexChanged += new System.EventHandler(this.year_combobox_SelectedIndexChanged);
+
             int currentyear = DateTime.Now.Year;
 
             for (int selectyear = currentyear; selectyear >= 2020; selectyear--)
@@ -247,6 +248,17 @@ namespace saft_sender
             this.month_combobox.TabIndex = 20;
             this.month_combobox.SelectedIndexChanged += new System.EventHandler(this.month_combobox_SelectedIndexChanged);
             // 
+            // abrirsaft_path
+            // 
+            this.abrirsaft_path.AutoSize = true;
+            this.abrirsaft_path.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.abrirsaft_path.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.abrirsaft_path.Location = new System.Drawing.Point(111, 335);
+            this.abrirsaft_path.Name = "abrirsaft_path";
+            this.abrirsaft_path.Size = new System.Drawing.Size(0, 12);
+            this.abrirsaft_path.TabIndex = 21;
+            this.abrirsaft_path.Click += new System.EventHandler(this.abrirsaft_path_Click);
+            // 
             // resume_path
             // 
             this.resume_path.AutoSize = true;
@@ -266,17 +278,6 @@ namespace saft_sender
             this.jar_path.Name = "jar_path";
             this.jar_path.Size = new System.Drawing.Size(0, 12);
             this.jar_path.TabIndex = 23;
-            // 
-            // abrirsaft_path
-            // 
-            this.abrirsaft_path.AutoSize = true;
-            this.abrirsaft_path.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.abrirsaft_path.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.abrirsaft_path.Location = new System.Drawing.Point(111, 335);
-            this.abrirsaft_path.Name = "abrirsaft_path";
-            this.abrirsaft_path.Size = new System.Drawing.Size(0, 12);
-            this.abrirsaft_path.TabIndex = 21;
-            this.abrirsaft_path.Click += new System.EventHandler(this.abrirsaft_path_Click);
             // 
             // SaftSenderForm
             // 
@@ -306,6 +307,7 @@ namespace saft_sender
             this.Controls.Add(this.submit_button);
             this.Controls.Add(this.pictureBox1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SaftSenderForm";
             this.Text = "Saft Sender v1.0";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

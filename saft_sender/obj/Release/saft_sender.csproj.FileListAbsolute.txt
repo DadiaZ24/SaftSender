@@ -26,3 +26,17 @@ C:\Users\diogo\Desktop\Personal Work\saftsender\saft_sender\obj\Release\saft_sen
 C:\Users\diogo\Desktop\Personal Work\saftsender\saft_sender\obj\Release\saft_sender.application
 C:\Users\diogo\Desktop\Personal Work\saftsender\saft_sender\obj\Release\saft_sender.exe
 C:\Users\diogo\Desktop\Personal Work\saftsender\saft_sender\obj\Release\saft_sender.pdb
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\bin\Release\saft_sender.exe.config
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\bin\Release\saft_sender.exe.manifest
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\bin\Release\saft_sender.application
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\bin\Release\saft_sender.exe
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\bin\Release\saft_sender.pdb
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\obj\Release\saft_sender.csproj.AssemblyReference.cache
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\obj\Release\saft_sender.SaftSenderForm.resources
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\obj\Release\saft_sender.Properties.Resources.resources
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\obj\Release\saft_sender.csproj.GenerateResource.cache
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\obj\Release\saft_sender.csproj.CoreCompileInputs.cache
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\obj\Release\saft_sender.exe.manifest
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\obj\Release\saft_sender.application
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\obj\Release\saft_sender.exe
+C:\Users\diogo\Desktop\Personal Work\saftsenderv1\saft_sender\obj\Release\saft_sender.pdb
