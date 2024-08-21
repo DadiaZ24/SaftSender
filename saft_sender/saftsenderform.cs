@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Xml;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace saft_sender
@@ -52,14 +53,44 @@ namespace saft_sender
                     error_message_box("O ficheiro não é do tipo xml!");
             }
         }
+        //Parsing errors
+        private void errorParser(string error)
+        {
+            if (error.Contains("<response code=\"-1\">"))
+                error_message_box("Ocorreu um erro durante o envio do ficheiro.");
+            else if (error.Contains("<response code=\"-2\">"))
+                error_message_box("O ficheiro recebido não tem o mesmo tamanho que o ficheiro enviado.");
+            else if (error.Contains("<response code=\"-3\">"))
+                error_message_box("Mensagem específica da validação que não está a ser respeitada.");
+            else if (error.Contains("<response code=\"-4\">"))
+                error_message_box("Ocorreu um erro durante o envio do ficheiro.");
+            else if (error.Contains("<response code=\"-5\">"))
+                error_message_box("O ficheiro selecionado já foi enviado para a AT.");
+            else if (error.Contains("<response code=\"-6\">"))
+                error_message_box("Erro no processo de conversão.");
+            else if (error.Contains("<response code=\"-7\">"))
+                error_message_box("O cliente de linha de comandos que está a utilizar não se encontra atualizado. Por favor aceda ao portal e-fatura e obtenha a nova versão.");
+            else if (error.Contains("<response code=\"-8\">"))
+                error_message_box("O ficheiro resumido não pode ser o mesmo que o ficheiro seleccionado para envio.");
+            else if (error.Contains("<response code=\"-9\">"))
+                error_message_box("Para poder entregar o SAF-T na versão que indicou necessita de atualizar o cliente de linha de comandos. Para isso, por favor, aceda ao portal e-fatura e obtenha a nova versão.");
+            else if (error.Contains("<response code=\"-401\">"))
+                error_message_box("Login failed for user. ERROR CODE: <ERRO ANTENTICAÇÃO>");
+            else if (error.Contains("<response code=\"-666\">"))
+                error_message_box("Ocorreu um erro.");
+            else if (error.Contains("<response code=\"200\">"))
+                MessageBox.Show("Succeso no envio!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else if (error.Contains("Exception in thread"))
+                error_message_box("Há um problema com o seu ficheiro saft. Contacte o desenvolvedor deste programa para mais informações.");
+            else
+                error_message_box("Há um erro com o envio.\n" + error);
+        }
 
         //submit button Code
         private void submit_button_Click(object sender, EventArgs e)
         {
             string nif      = nif_txtbox.Text;
             string password = pass_txtbox.Text;
-            //string year     = year_txtbox.Text;
-            //string month    = month_txtbox.Text;
 
             try
             {
@@ -112,34 +143,7 @@ namespace saft_sender
                     string error = process.StandardError.ReadToEnd();
                     process.WaitForExit();
                     if (!string.IsNullOrEmpty(error))
-                    {
-                        if (error.Contains("<response code=\"-1\">"))
-                            error_message_box("Ocorreu um erro durante o envio do ficheiro.");
-                        else if (error.Contains("<response code=\"-2\">"))
-                            error_message_box("O ficheiro recebido não tem o mesmo tamanho que o ficheiro enviado.");
-                        else if (error.Contains("<response code=\"-3\">"))
-                            error_message_box("Mensagem específica da validação que não está a ser respeitada.");
-                        else if (error.Contains("<response code=\"-4\">"))
-                            error_message_box("Ocorreu um erro durante o envio do ficheiro.");
-                        else if (error.Contains("<response code=\"-5\">"))
-                            error_message_box("O ficheiro selecionado já foi enviado para a AT.");
-                        else if (error.Contains("<response code=\"-6\">"))
-                            error_message_box("Erro no processo de conversão.");
-                        else if (error.Contains("<response code=\"-7\">"))
-                            error_message_box("O cliente de linha de comandos que está a utilizar não se encontra atualizado. Por favor aceda ao portal e-fatura e obtenha a nova versão.");
-                        else if (error.Contains("<response code=\"-8\">"))
-                            error_message_box("O ficheiro resumido não pode ser o mesmo que o ficheiro seleccionado para envio.");
-                        else if (error.Contains("<response code=\"-9\">"))
-                            error_message_box("Para poder entregar o SAF-T na versão que indicou necessita de atualizar o cliente de linha de comandos. Para isso, por favor, aceda ao portal e-fatura e obtenha a nova versão.");
-                        else if (error.Contains("<response code=\"-401\">"))
-                            error_message_box("Login failed for user. ERROR CODE: <ERRO ANTENTICAÇÃO>");
-                        else if (error.Contains("<response code=\"-666\">"))
-                            error_message_box("Ocorreu um erro.");
-                        else if (error.Contains("<response code=\"200\">"))
-                            MessageBox.Show("Succeso no envio!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        else if (error.Contains("Exception in thread"))
-                            error_message_box("Há um problema com o seu ficheiro saft. Contacte o desenvolvedor deste programa para mais informações.");
-                    }
+                        errorParser(error);
                     else if (!string.IsNullOrEmpty (output))
                     {
                         if (output.Contains("<response code=\"-1\">"))
@@ -166,13 +170,14 @@ namespace saft_sender
                             MessageBox.Show("ERRO: Ocorreu um erro.");
                         else if (output.Contains("<response code=\"200\">"))
                         {
-                            XDocument xdoc = XDocument.Parse(output);
-                            string totalfaturas = xdoc.Root.Element("totalFaturas").Value;
-                            string totalcreditos = xdoc.Root.Element("totalCreditos").Value;
-                            string totaldebitos = xdoc.Root.Element("totalDebitos").Value;
-                            string warning = xdoc.Root.Element("warning").Value;
-                            string nomeficheiro = xdoc.Root.Element("nomeFicheiro").Value;
-                            string createdate = xdoc.Root.Element("createdDate").Value;
+                            XmlDocument xmlDoc = new XmlDocument();
+                            xmlDoc.LoadXml(output);
+                            string totalfaturas = xmlDoc.SelectSingleNode("//totalFaturas").InnerText;
+                            string totalcreditos = xmlDoc.SelectSingleNode("//totalCreditos").InnerText;
+                            string totaldebitos = xmlDoc.SelectSingleNode("//totalDebitos").InnerText;
+                            string warning = xmlDoc.SelectSingleNode("//warning").InnerText;
+                            string nomeficheiro = xmlDoc.SelectSingleNode("//nomeFicheiro").InnerText;
+                            string createdate = xmlDoc.SelectSingleNode("//createdDate").InnerText;
 
                             if (string.IsNullOrEmpty(totalfaturas) || string.IsNullOrEmpty(totalcreditos) || string.IsNullOrEmpty(totaldebitos))
                                 error_message_box("Apesar do sucesso no envio, houve um problema em obter o output esperado.");
@@ -180,7 +185,13 @@ namespace saft_sender
                             {
                                 if (!string.IsNullOrEmpty(warning))
                                 {
-                                    MessageBox.Show("Succeso no envio!\nTotal de Faturas: {totalfaturas}\nTotal de Créditos: {totalcreditos}\nTotal de Débitos: {totaldebitos}\nAtenção: {warning}\nNome do Ficheiro: {nomeficheiro}\nData de Envio: {createdate}");
+                                    MessageBox.Show($"Succeso no envio!\n" + 
+                                                    $"Total de Faturas: {totalfaturas}\n" + 
+                                                    $"Total de Créditos: {totalcreditos}\n" + 
+                                                    $"Total de Débitos: {totaldebitos}\n" + 
+                                                    $"Atenção: {warning}\n" + 
+                                                    $"Nome do Ficheiro: {nomeficheiro}\n" + 
+                                                    $"Data de Envio: {createdate}", "Sucesso no envio!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     nif_txtbox.Text = null;
                                     pass_txtbox.Text = null;
                                     saft_file_path = null;
@@ -189,7 +200,12 @@ namespace saft_sender
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Succeso no envio!\nTotal de Faturas: {totalfaturas}\nTotal de Créditos: {totalcreditos}\nTotal de Débitos: {totaldebitos}\nNome do Ficheiro: {nomeficheiro}\nData de Envio: {createdate}");
+                                    MessageBox.Show($"Succeso no envio!\n" + 
+                                                    $"Total de Faturas: {totalfaturas}\n" + 
+                                                    $"Total de Créditos: {totalcreditos}\n" +
+                                                    $"Total de Débitos: {totaldebitos}\n" + 
+                                                    $"Nome do Ficheiro: {nomeficheiro}\n" + 
+                                                    $"Data de Envio: {createdate}", "Sucesso no envio!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     nif_txtbox.Text = null;
                                     pass_txtbox.Text = null;
                                     saft_file_path = null;

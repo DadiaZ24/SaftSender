@@ -51,7 +51,6 @@ namespace saft_sender
             this.abrirsaft_path = new System.Windows.Forms.Label();
             this.resume_path = new System.Windows.Forms.Label();
             this.jar_path = new System.Windows.Forms.Label();
-            this.clearsaft_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -279,18 +278,6 @@ namespace saft_sender
             this.abrirsaft_path.TabIndex = 21;
             this.abrirsaft_path.Click += new System.EventHandler(this.abrirsaft_path_Click);
             // 
-            // clearsaft_button
-            // 
-            this.clearsaft_button.BackColor = System.Drawing.Color.Transparent;
-            this.clearsaft_button.FlatAppearance.BorderSize = 0;
-            this.clearsaft_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearsaft_button.Image = global::saft_sender.Properties.Resources.other_x_icon_2048x2043_ueafpzlh__2_;
-            this.clearsaft_button.Location = new System.Drawing.Point(316, 322);
-            this.clearsaft_button.Name = "clearsaft_button";
-            this.clearsaft_button.Size = new System.Drawing.Size(17, 17);
-            this.clearsaft_button.TabIndex = 24;
-            this.clearsaft_button.UseVisualStyleBackColor = false;
-            // 
             // SaftSenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,7 +286,6 @@ namespace saft_sender
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(797, 485);
-            this.Controls.Add(this.clearsaft_button);
             this.Controls.Add(this.jar_path);
             this.Controls.Add(this.resume_path);
             this.Controls.Add(this.abrirsaft_path);
@@ -350,7 +336,6 @@ namespace saft_sender
         private System.Windows.Forms.Label abrirsaft_path;
         private System.Windows.Forms.Label resume_path;
         private System.Windows.Forms.Label jar_path;
-        private System.Windows.Forms.Button clearsaft_button;
     }
 }
 
