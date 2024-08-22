@@ -29,3 +29,17 @@ C:\Users\POSTO05PRT\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.csproj
 C:\Users\POSTO05PRT\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.csproj.CoreCompileInputs.cache
 C:\Users\POSTO05PRT\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.exe
 C:\Users\POSTO05PRT\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.pdb
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\bin\Debug\saft_sender.exe.config
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\bin\Debug\saft_sender.exe.manifest
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\bin\Debug\saft_sender.application
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\bin\Debug\saft_sender.exe
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\bin\Debug\saft_sender.pdb
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.csproj.AssemblyReference.cache
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.SaftSenderForm.resources
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.Properties.Resources.resources
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.csproj.GenerateResource.cache
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.csproj.CoreCompileInputs.cache
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.exe.manifest
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.application
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.exe
+C:\Users\POSTO04MLS\Desktop\Saft_Sender\saft_sender\obj\Debug\saft_sender.pdb

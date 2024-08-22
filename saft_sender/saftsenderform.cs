@@ -24,14 +24,16 @@ namespace saft_sender
         {
             InitializeComponent();
         }
-        //Create the saft file path variable
-        private string saft_file_path;
-        private string jar_file_path;
-        private string resume_saft_path;
-        private string saft_file_name;
-        private string year;
-        private string month;
+        //Create the needed variables
+        private string[] saft_file_path = new string[99];
+        private string   jar_file_path;
+        private string[] resume_saft_path = new string[99];
+        private string[] saft_file_name = new string[99];
+        private string   year;
+        private string   month;
+        private string[] status = new string[99];
 
+        //error message box format create
         private void error_message_box(string errorstr)
         {
             MessageBox.Show(errorstr, "Ocorreu um erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -40,17 +42,51 @@ namespace saft_sender
         //Open Saft Button Code
         private void opensaft_button_Click(object sender, EventArgs e)
         {
+            OpenFileDialog opensaft_dialog = new OpenFileDialog
+            {
+                Multiselect = true
+            };
+
+            //Clear everything in resume saft - safety protocol
+            if (!string.IsNullOrEmpty(resume_saft_path[0]))
+            {
+                for (int j = 0; j < resume_saft_path.Length; j++)
+                    resume_saft_path[j] = null;
+            }
+
             var saftpath_dialog = opensaft_dialog.ShowDialog();
             if (saftpath_dialog == DialogResult.OK)
             {
-                saft_file_path = opensaft_dialog.FileName;
-                if (Path.GetExtension(saft_file_path).Equals(".xml", StringComparison.OrdinalIgnoreCase))
+                saft_file_path = opensaft_dialog.FileNames;
+                int saft_file_path_count = ArrayCount(saft_file_path);
+
+                for (int i = 0; i < saft_file_path_count; i++)
                 {
-                    saft_file_name = Path.GetFileName(saft_file_path);
-                    abrirsaft_path.Text = saft_file_name;
+                    if (Path.GetExtension(saft_file_path[i]).Equals(".xml", StringComparison.OrdinalIgnoreCase))
+                    {
+                        int saft_total = saft_file_path_count;
+                        if (saft_total == 1)
+                        {
+                            saft_file_name[0] = Path.GetFileName(saft_file_path[i]);
+                            abrirsaft_path.Text = saft_file_name[0];
+                        }
+                        else if (saft_total <= 0)
+                            error_message_box("Nenhum ficheiro selecionado!");
+                        else
+                        {
+                            string saftfile_display = saft_file_path_count.ToString() + " ficheiros selecionados.";
+                            abrirsaft_path.Text = saftfile_display;
+                            saft_file_name[i] = Path.GetFileName(saft_file_path[i]);
+                        }
+                    }
+                    else
+                    {
+                        error_message_box("Um dos ficheiros que tentou abrir não é do tipo xml!");
+                        for (int j = 0; j < saft_file_path.Length; j++)
+                            saft_file_path[i] = null;
+                    }
                 }
-                else
-                    error_message_box("O ficheiro não é do tipo xml!");
+
             }
         }
 
@@ -73,7 +109,7 @@ namespace saft_sender
                     error_message_box("O NIF tem que conter 9 dígitos.");
                     return;
                 }
-                if (string.IsNullOrEmpty(saft_file_path))
+                if (string.IsNullOrEmpty(saft_file_path[0]))
                 {
                     error_message_box("Não selecionou nenhum ficheiro saft!");
                     return;
@@ -83,90 +119,69 @@ namespace saft_sender
                     error_message_box("Não efetuou o download do ficheiro JAR!");
                     return;
                 }
-                if (string.IsNullOrEmpty(resume_saft_path))
+                if (string.IsNullOrEmpty(resume_saft_path[0]))
                 {
                     error_message_box("Não selecionou um caminho para guardar o ficheiro resumido!");
                     return;
                 }
 
-                string cmd = $"-jar {jar_file_path} -n {nif} -p {password} -a {year} -m {month} -op enviar -i \"{saft_file_path}\" -md \"{resume_saft_path}\"";
-
-                ProcessStartInfo startInfo = new ProcessStartInfo
+                int saft_file_path_count = ArrayCount(saft_file_path);
+                for (int i = 0; i < saft_file_path_count; i++)
                 {
-                    FileName = "java",
-                    Arguments = cmd,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
+                    string cmd = $"-jar {jar_file_path} -n {nif} -p {password} -a {year} -m {month} -op enviar -i \"{saft_file_path[i]}\" -md \"{resume_saft_path[i]}\"";
+
+                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    {
+                        FileName = "java",
+                        Arguments = cmd,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    };
 
 
-                using (Process process = new Process())
-                {
-                    process.StartInfo = startInfo;
-                    process.Start();
+                    using (Process process = new Process())
+                    {
+                        process.StartInfo = startInfo;
+                        process.Start();
 
-                    string output = process.StandardOutput.ReadToEnd();
-                    string error = process.StandardError.ReadToEnd();
-                    process.WaitForExit();
-                    if (!string.IsNullOrEmpty(error))
-                        if (errorParser(error) == true)
-                            return;
+                        string output = process.StandardOutput.ReadToEnd();
+                        string error = process.StandardError.ReadToEnd();
+                        process.WaitForExit();
+                        if (!string.IsNullOrEmpty(error))
+                        {
+                            if (errorParser(error, i) == true)
+                            {
+                                error_message_box(status[i]);
+                                continue;
+                            }
+                        }
                         else if (!string.IsNullOrEmpty(output))
                         {
-                            if (errorParser(output) == true)
-                                return;
-                            if (output.Contains("<response code=\"200\">"))
+                            if (errorParser(output, i) == true)
                             {
-                                XmlDocument xmlDoc = new XmlDocument();
-                                xmlDoc.LoadXml(output);
-                                string totalfaturas = xmlDoc.SelectSingleNode("//totalFaturas").InnerText;
-                                string totalcreditos = xmlDoc.SelectSingleNode("//totalCreditos").InnerText;
-                                string totaldebitos = xmlDoc.SelectSingleNode("//totalDebitos").InnerText;
-                                string warning = xmlDoc.SelectSingleNode("//warning").InnerText;
-                                string nomeficheiro = xmlDoc.SelectSingleNode("//nomeFicheiro").InnerText;
-                                string createdate = xmlDoc.SelectSingleNode("//createdDate").InnerText;
-
-                                if (string.IsNullOrEmpty(totalfaturas) || string.IsNullOrEmpty(totalcreditos) || string.IsNullOrEmpty(totaldebitos))
-                                    error_message_box("Apesar do sucesso no envio, houve um problema em obter o output esperado.");
-                                else
-                                {
-                                    if (!string.IsNullOrEmpty(warning))
-                                    {
-                                        MessageBox.Show($"Succeso no envio!\n" +
-                                                        $"Total de Faturas: {totalfaturas}\n" +
-                                                        $"Total de Créditos: {totalcreditos}\n" +
-                                                        $"Total de Débitos: {totaldebitos}\n" +
-                                                        $"Atenção: {warning}\n" +
-                                                        $"Nome do Ficheiro: {nomeficheiro}\n" +
-                                                        $"Data de Envio: {createdate}", "Sucesso no envio!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                        nif_txtbox.Text = null;
-                                        pass_txtbox.Text = null;
-                                        saft_file_path = null;
-                                        saft_file_name = null;
-                                        abrirsaft_path = null;
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show($"Succeso no envio!\n" +
-                                                        $"Total de Faturas: {totalfaturas}\n" +
-                                                        $"Total de Créditos: {totalcreditos}\n" +
-                                                        $"Total de Débitos: {totaldebitos}\n" +
-                                                        $"Nome do Ficheiro: {nomeficheiro}\n" +
-                                                        $"Data de Envio: {createdate}", "Sucesso no envio!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                        nif_txtbox.Text = null;
-                                        pass_txtbox.Text = null;
-                                        saft_file_path = null;
-                                        saft_file_name = null;
-                                        abrirsaft_path = null;
-                                    }
-                                }
+                                error_message_box(status[i]);
+                                continue;
                             }
-                            else if (output.Contains("Exception in thread"))
-                                MessageBox.Show("ERRO: Há um problema com o seu ficheiro saft. Contacte o desenvolvedor deste programa para mais informações.");
+                            else
+                            {
+                                nif_txtbox.Text = null;
+                                pass_txtbox.Text = null;
+                                for (int n = 0; n < saft_file_path_count; n++)
+                                {
+                                    saft_file_path[n] = null;
+                                    saft_file_name[n] = null;
+                                }
+                                abrirsaft_path = null;
+                            }
                         }
+                    }
+
                 }
+                string terminus_message = string.Join(Environment.NewLine, status.Where(s => s != null));
+                MessageBox.Show(terminus_message, "Informação de Envio:", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
             catch (Exception ex)
             {
@@ -175,6 +190,8 @@ namespace saft_sender
 
 
         }
+
+        //DOWNLOAD JAR BUTTON --------------------------------------------------------------------------------
         private async void downloadjar_button_Click(object sender, EventArgs e)
         {
             using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
@@ -191,23 +208,43 @@ namespace saft_sender
                 }
             }
         }
+
+        //RESUME SAFT BUTTON CLICK---------------------------------------------------------------
         private void resumesaft_button_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(saft_file_name))
+            if (string.IsNullOrEmpty(saft_file_name[0]))
             {
                 MessageBox.Show("Erro: Deve selecionar o ficheiro saft primeiro!");
                 return;
             }
-            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+            using (var folderBrowserDialog = new OpenFileDialog())
             {
+                folderBrowserDialog.CheckFileExists = false;
+                folderBrowserDialog.ValidateNames = false;
+                folderBrowserDialog.ShowReadOnly = false;
+                folderBrowserDialog.Filter = "Folders|*.none";
+                folderBrowserDialog.FileName = "Folder Selection";
+
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    resume_saft_path = Path.Combine(folderBrowserDialog.SelectedPath, "resumido_" + saft_file_name);
-                    resume_path.Text = "resumido_" + saft_file_name;
+                    string folderpath = System.IO.Path.GetDirectoryName(folderBrowserDialog.FileName);
+                    int saft_file_path_count = ArrayCount(saft_file_path);
+                    for (int i = 0; i < saft_file_path_count; i++)
+                    {
+                        resume_saft_path[i] = Path.Combine(folderpath, "resumido_" + saft_file_name[i]);
+                        if (saft_file_path_count <= 0)
+                        {
+                            error_message_box("Deve selecionar um ficheiro saft primeiro!");
+                            return;
+                        }
+                        else
+                            resume_path.Text = folderpath;
+                    }
                 }
             }
         }
 
+        //DOWNLOAD JAR FILE TASK ----------------------------------------------------------------------
         private async Task DownloadJarFile(string url, string jar_file_path)
         {
             using (HttpClient client = new HttpClient())
@@ -226,6 +263,7 @@ namespace saft_sender
             }
         }
 
+        //EXIT BUTTON ---------------------------------------------------------------------------------
         private void exit_button_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -274,73 +312,87 @@ namespace saft_sender
                     month = "12";
             }
         }
-        //Parsing errors
-        private bool errorParser(string error)
+        //Parsing errors ----------------------------------------------------------------------
+        private bool errorParser(string error, int saftnbr)
         {
             if (error.Contains("<response code=\"-1\">"))
             {
-                error_message_box("Ocorreu um erro durante o envio do ficheiro.");
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": Ocorreu um erro durante o envio do ficheiro.";
                 return true;
             }
             else if (error.Contains("<response code=\"-2\">"))
             {
-                error_message_box("O ficheiro recebido não tem o mesmo tamanho que o ficheiro enviado.");
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": O ficheiro recebido não tem o mesmo tamanho que o ficheiro enviado.";
                 return true;
             }
             else if (error.Contains("<response code=\"-3\">"))
             {
-                error_message_box("Mensagem específica da validação que não está a ser respeitada.");
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": Mensagem específica da validação que não está a ser respeitada.";
                 return true;
             }
             else if (error.Contains("<response code=\"-4\">"))
             {
-                error_message_box("Ocorreu um erro durante o envio do ficheiro.");
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": Ocorreu um erro durante o envio do ficheiro.";
                 return true;
             }
             else if (error.Contains("<response code=\"-5\">"))
             {
-                error_message_box("O ficheiro selecionado já foi enviado para a AT.");
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": O ficheiro selecionado já foi enviado para a AT.";
                 return true;
             }
             else if (error.Contains("<response code=\"-6\">"))
             {
-                error_message_box("Erro no processo de conversão.");
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": Erro no processo de conversão.";
                 return true;
             }
             else if (error.Contains("<response code=\"-7\">"))
             {
-                error_message_box("O cliente de linha de comandos que está a utilizar não se encontra atualizado. Por favor aceda ao portal e-fatura e obtenha a nova versão.");
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": O cliente de linha de comandos que está a utilizar não se encontra atualizado. Por favor aceda ao portal e-fatura e obtenha a nova versão.";
                 return true;
             }
             else if (error.Contains("<response code=\"-8\">"))
             {
-                error_message_box("O ficheiro resumido não pode ser o mesmo que o ficheiro seleccionado para envio.");
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": O ficheiro resumido não pode ser o mesmo que o ficheiro seleccionado para envio.";
                 return true;
             }
             else if (error.Contains("<response code=\"-9\">"))
             {
-                error_message_box("Para poder entregar o SAF-T na versão que indicou necessita de atualizar o cliente de linha de comandos. Para isso, por favor, aceda ao portal e-fatura e obtenha a nova versão.");
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": Para poder entregar o SAF-T na versão que indicou necessita de atualizar o cliente de linha de comandos. Para isso, por favor, aceda ao portal e-fatura e obtenha a nova versão.";
                 return true;
             }
             else if (error.Contains("<response code=\"-401\">"))
             {
-                error_message_box("Login failed for user. ERROR CODE: <ERRO ANTENTICAÇÃO>");
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": Login failed for user. ERROR CODE: <ERRO ANTENTICAÇÃO>";
                 return true;
             }
             else if (error.Contains("<response code=\"-666\">"))
             {
-                error_message_box("Ocorreu um erro.");
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": Ocorreu um erro.";
+                return true;
+            }
+            else if (error.Contains("Exception in thread"))
+            {
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": Há um problema com o seu ficheiro saft. Contacte o desenvolvedor deste programa para mais informações.";
                 return true;
             }
             else if (error.Contains("<response code=\"200\">"))
-                return false;
-            else if (error.Contains("Exception in thread"))
             {
-                error_message_box("Há um problema com o seu ficheiro saft. Contacte o desenvolvedor deste programa para mais informações.");
-                return true;
+                status[saftnbr] = $"Saft \"{saft_file_name[saftnbr]}\" enviado com sucesso!";
+                return false;
             }
             return false;
         }
+
+        private int ArrayCount(string[] array)
+        {
+            int count = 0;
+            foreach (var item in array) {
+                if (item.Length > 0)
+                    count++;
+            }
+            return count;
+        }
+
 
         private void abrirsaft_path_Click(object sender, EventArgs e)
         {
@@ -353,6 +405,16 @@ namespace saft_sender
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pass_txtbox_TextChanged(object sender, EventArgs e)
         {
 
         }
