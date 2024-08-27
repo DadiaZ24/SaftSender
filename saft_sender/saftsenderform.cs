@@ -23,6 +23,11 @@ namespace saft_sender
         public SaftSenderForm()
         {
             InitializeComponent();
+            int currentyear = DateTime.Now.Year;
+            for (int selectyear = currentyear; selectyear >= 2020; selectyear--)
+            {
+                this.year_combobox.Items.Add(selectyear.ToString());
+            }
         }
         //Create the needed variables
         private string[] saft_file_path = new string[99];
@@ -116,7 +121,7 @@ namespace saft_sender
                 }
                 if (string.IsNullOrEmpty(jar_file_path))
                 {
-                    error_message_box("Não efetuou o download do ficheiro JAR!");
+                    error_message_box("Ocorreu um erro no download das dependências. Por favor, tente novamente.");
                     return;
                 }
                 if (string.IsNullOrEmpty(resume_saft_path[0]))
@@ -125,6 +130,7 @@ namespace saft_sender
                     return;
                 }
 
+                jar_download();
                 int saft_file_path_count = ArrayCount(saft_file_path);
                 for (int i = 0; i < saft_file_path_count; i++)
                 {
@@ -192,21 +198,12 @@ namespace saft_sender
         }
 
         //DOWNLOAD JAR BUTTON --------------------------------------------------------------------------------
-        private async void downloadjar_button_Click(object sender, EventArgs e)
-        {
-            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
-            {
-                folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
-                folderBrowserDialog.SelectedPath = @"\\srvfiscomelres\OneDrive\basededados";
-                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string url = "https://faturas.portaldasfinancas.gov.pt/factemipf_static/java/FACTEMICLI-2.8.4-60332-cmdClient.jar";
-                    jar_file_path = Path.Combine(folderBrowserDialog.SelectedPath, "FACTEMICLI-2.8.4-60332-cmdClient.jar");
 
-                    await DownloadJarFile(url, jar_file_path);
-                    jar_path.Text = jar_file_path;
-                }
-            }
+        private async void jar_download()
+        {
+            string url = "https://faturas.portaldasfinancas.gov.pt/factemipf_static/java/FACTEMICLI-2.8.4-60332-cmdClient.jar";
+            jar_file_path = "./jar/FACTEMICLI-2.8.4-60332-cmdClient.jar";
+            await DownloadJarFile(url, jar_file_path);
         }
 
         //RESUME SAFT BUTTON CLICK---------------------------------------------------------------
@@ -267,11 +264,6 @@ namespace saft_sender
         private void exit_button_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void loading_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void year_combobox_SelectedIndexChanged(object sender, EventArgs e)
@@ -393,30 +385,5 @@ namespace saft_sender
             return count;
         }
 
-
-        private void abrirsaft_path_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pass_txtbox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

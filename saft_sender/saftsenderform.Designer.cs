@@ -43,7 +43,6 @@ namespace saft_sender
             this.month_label = new System.Windows.Forms.Label();
             this.title1 = new System.Windows.Forms.Label();
             this.title2 = new System.Windows.Forms.Label();
-            this.downloadjar_button = new System.Windows.Forms.Button();
             this.resumesaft_button = new System.Windows.Forms.Button();
             this.year_combobox = new System.Windows.Forms.ComboBox();
             this.month_combobox = new System.Windows.Forms.ComboBox();
@@ -117,7 +116,6 @@ namespace saft_sender
             this.pass_txtbox.Name = "pass_txtbox";
             this.pass_txtbox.Size = new System.Drawing.Size(135, 27);
             this.pass_txtbox.TabIndex = 9;
-            this.pass_txtbox.TextChanged += new System.EventHandler(this.pass_txtbox_TextChanged);
             // 
             // pass
             // 
@@ -176,17 +174,6 @@ namespace saft_sender
             this.title2.TabIndex = 16;
             this.title2.Text = "A AT";
             // 
-            // downloadjar_button
-            // 
-            this.downloadjar_button.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.downloadjar_button.Location = new System.Drawing.Point(18, 391);
-            this.downloadjar_button.Name = "downloadjar_button";
-            this.downloadjar_button.Size = new System.Drawing.Size(89, 34);
-            this.downloadjar_button.TabIndex = 17;
-            this.downloadjar_button.Text = "Download JAR";
-            this.downloadjar_button.UseVisualStyleBackColor = true;
-            this.downloadjar_button.Click += new System.EventHandler(this.downloadjar_button_Click);
-            // 
             // resumesaft_button
             // 
             this.resumesaft_button.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -207,12 +194,7 @@ namespace saft_sender
             this.year_combobox.Size = new System.Drawing.Size(77, 26);
             this.year_combobox.TabIndex = 19;
             this.year_combobox.SelectedIndexChanged += new System.EventHandler(this.year_combobox_SelectedIndexChanged);
-            int currentyear = DateTime.Now.Year;
-
-            for (int selectyear = currentyear; selectyear >= 2020; selectyear--)
-            {
-                this.year_combobox.Items.Add(selectyear.ToString());
-            }
+            
             // 
             // month_combobox
             // 
@@ -246,7 +228,6 @@ namespace saft_sender
             this.abrirsaft_path.Name = "abrirsaft_path";
             this.abrirsaft_path.Size = new System.Drawing.Size(0, 12);
             this.abrirsaft_path.TabIndex = 21;
-            this.abrirsaft_path.Click += new System.EventHandler(this.abrirsaft_path_Click);
             // 
             // resume_path
             // 
@@ -277,7 +258,6 @@ namespace saft_sender
             this.pictureBox1.Size = new System.Drawing.Size(482, 473);
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // SaftSenderForm
             // 
@@ -293,7 +273,6 @@ namespace saft_sender
             this.Controls.Add(this.month_combobox);
             this.Controls.Add(this.year_combobox);
             this.Controls.Add(this.resumesaft_button);
-            this.Controls.Add(this.downloadjar_button);
             this.Controls.Add(this.title2);
             this.Controls.Add(this.title1);
             this.Controls.Add(this.month_label);
@@ -330,7 +309,6 @@ namespace saft_sender
         private System.Windows.Forms.Label month_label;
         private System.Windows.Forms.Label title1;
         private System.Windows.Forms.Label title2;
-        private System.Windows.Forms.Button downloadjar_button;
         private System.Windows.Forms.Button resumesaft_button;
         private System.Windows.Forms.ComboBox year_combobox;
         private System.Windows.Forms.ComboBox month_combobox;
