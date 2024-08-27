@@ -116,6 +116,7 @@ namespace saft_sender
             this.pass_txtbox.Name = "pass_txtbox";
             this.pass_txtbox.Size = new System.Drawing.Size(135, 27);
             this.pass_txtbox.TabIndex = 9;
+            this.pass_txtbox.PasswordChar = '*';
             // 
             // pass
             // 

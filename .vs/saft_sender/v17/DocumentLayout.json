@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\diogo\\Desktop\\Personal Work\\saftsenderv1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F223F901-EAE9-4D26-8B6C-811C202AB0AA}|saft_sender\\saft_sender.csproj|c:\\users\\diogo\\desktop\\personal work\\saftsenderv1\\saft_sender\\saftsenderform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{F223F901-EAE9-4D26-8B6C-811C202AB0AA}|saft_sender\\saft_sender.csproj|solutionrelative:saft_sender\\saftsenderform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F223F901-EAE9-4D26-8B6C-811C202AB0AA}|saft_sender\\saft_sender.csproj|c:\\users\\diogo\\desktop\\personal work\\saftsenderv1\\saft_sender\\saftsenderform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F223F901-EAE9-4D26-8B6C-811C202AB0AA}|saft_sender\\saft_sender.csproj|solutionrelative:saft_sender\\saftsenderform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F223F901-EAE9-4D26-8B6C-811C202AB0AA}|saft_sender\\saft_sender.csproj|c:\\users\\diogo\\desktop\\personal work\\saftsenderv1\\saft_sender\\saftsenderform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F223F901-EAE9-4D26-8B6C-811C202AB0AA}|saft_sender\\saft_sender.csproj|solutionrelative:saft_sender\\saftsenderform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F223F901-EAE9-4D26-8B6C-811C202AB0AA}|saft_sender\\saft_sender.csproj|c:\\users\\diogo\\desktop\\personal work\\saftsenderv1\\saft_sender\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,45 +26,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "saftsenderform.cs",
-              "DocumentMoniker": "C:\\Users\\diogo\\Desktop\\Personal Work\\saftsenderv1\\saft_sender\\saftsenderform.cs",
-              "RelativeDocumentMoniker": "saft_sender\\saftsenderform.cs",
-              "ToolTip": "C:\\Users\\diogo\\Desktop\\Personal Work\\saftsenderv1\\saft_sender\\saftsenderform.cs",
-              "RelativeToolTip": "saft_sender\\saftsenderform.cs",
-              "ViewState": "AQIAALkAAAAAAAAAAAAuwMcAAABuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-27T17:35:28.17Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "saftsenderform.Designer.cs",
               "DocumentMoniker": "C:\\Users\\diogo\\Desktop\\Personal Work\\saftsenderv1\\saft_sender\\saftsenderform.Designer.cs",
               "RelativeDocumentMoniker": "saft_sender\\saftsenderform.Designer.cs",
               "ToolTip": "C:\\Users\\diogo\\Desktop\\Personal Work\\saftsenderv1\\saft_sender\\saftsenderform.Designer.cs",
               "RelativeToolTip": "saft_sender\\saftsenderform.Designer.cs",
-              "ViewState": "AQIAACMBAAAAAAAAAAAuwNEAAAAXAAAA",
+              "ViewState": "AQIAAFsAAAAAAAAAAAAuwGgAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-27T17:35:16.112Z",
+              "WhenOpened": "2024-08-27T23:11:19.304Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "saftsenderform.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\diogo\\Desktop\\Personal Work\\saftsenderv1\\saft_sender\\saftsenderform.cs",
-              "RelativeDocumentMoniker": "saft_sender\\saftsenderform.cs",
-              "ToolTip": "C:\\Users\\diogo\\Desktop\\Personal Work\\saftsenderv1\\saft_sender\\saftsenderform.cs [Design]",
-              "RelativeToolTip": "saft_sender\\saftsenderform.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-27T17:35:13.921Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\diogo\\Desktop\\Personal Work\\saftsenderv1\\saft_sender\\Program.cs",
               "RelativeDocumentMoniker": "saft_sender\\Program.cs",
@@ -80,7 +47,7 @@
               "RelativeToolTip": "saft_sender\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-27T17:35:10.727Z",
+              "WhenOpened": "2024-08-27T23:11:13.517Z",
               "EditorCaption": ""
             }
           ]
