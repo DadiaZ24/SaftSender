@@ -5,16 +5,23 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "saft_sender", "saft_sender\saft_sender.csproj", "{F223F901-EAE9-4D26-8B6C-811C202AB0AA}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{EEF38AA0-E301-4A4D-8F32-F90CA2A551DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		exe|Any CPU = exe|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F223F901-EAE9-4D26-8B6C-811C202AB0AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F223F901-EAE9-4D26-8B6C-811C202AB0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F223F901-EAE9-4D26-8B6C-811C202AB0AA}.exe|Any CPU.ActiveCfg = Release|Any CPU
+		{F223F901-EAE9-4D26-8B6C-811C202AB0AA}.exe|Any CPU.Build.0 = Release|Any CPU
 		{F223F901-EAE9-4D26-8B6C-811C202AB0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F223F901-EAE9-4D26-8B6C-811C202AB0AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEF38AA0-E301-4A4D-8F32-F90CA2A551DC}.Debug|Any CPU.ActiveCfg = Debug
+		{EEF38AA0-E301-4A4D-8F32-F90CA2A551DC}.exe|Any CPU.ActiveCfg = Debug
+		{EEF38AA0-E301-4A4D-8F32-F90CA2A551DC}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
