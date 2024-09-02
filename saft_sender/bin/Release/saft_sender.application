@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="saft_sender.exe.manifest" size="3954">
+    <dependentAssembly dependencyType="install" codebase="saft_sender.exe.manifest" size="3981">
       <assemblyIdentity name="saft_sender.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ZIBtWYwcMu3DDAuItBLgf0886UgG64KIE3ybskaCTRo=</dsig:DigestValue>
+        <dsig:DigestValue>h/vMNtiH9S+gQ0F/Y3T9RD0mdpB26SZEO9p8jZvfZ8Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

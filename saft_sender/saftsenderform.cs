@@ -20,6 +20,14 @@ namespace saft_sender
     public partial class SaftSenderForm : Form
     {
         //Initialize the form design
+        //Create the needed variables
+        private string[] saft_file_path = new string[99];
+        private string   jar_file_path;
+        private string[] resume_saft_path = new string[99];
+        private string[] saft_file_name = new string[99];
+        private string   year;
+        private string   month;
+        private string[] status = new string[99];
         public SaftSenderForm()
         {
             InitializeComponent();
@@ -29,14 +37,6 @@ namespace saft_sender
                 this.year_combobox.Items.Add(selectyear.ToString());
             }
         }
-        //Create the needed variables
-        private string[] saft_file_path = new string[99];
-        private string   jar_file_path;
-        private string[] resume_saft_path = new string[99];
-        private string[] saft_file_name = new string[99];
-        private string   year;
-        private string   month;
-        private string[] status = new string[99];
 
         //error message box format create
         private void error_message_box(string errorstr)
@@ -119,9 +119,9 @@ namespace saft_sender
                     error_message_box("Não selecionou nenhum ficheiro saft!");
                     return;
                 }
+                jar_download();
                 if (string.IsNullOrEmpty(jar_file_path))
                 {
-                    error_message_box("Ocorreu um erro no download das dependências. Por favor, tente novamente.");
                     return;
                 }
                 if (string.IsNullOrEmpty(resume_saft_path[0]))
@@ -130,7 +130,6 @@ namespace saft_sender
                     return;
                 }
 
-                jar_download();
                 int saft_file_path_count = ArrayCount(saft_file_path);
                 for (int i = 0; i < saft_file_path_count; i++)
                 {
@@ -204,6 +203,10 @@ namespace saft_sender
             string url = "https://faturas.portaldasfinancas.gov.pt/factemipf_static/java/FACTEMICLI-2.8.4-60332-cmdClient.jar";
             jar_file_path = "./jar/FACTEMICLI-2.8.4-60332-cmdClient.jar";
             await DownloadJarFile(url, jar_file_path);
+            if (string.IsNullOrEmpty(jar_file_path))
+            { 
+                error_message_box("Ocorreu um erro no download das dependências. Por favor, tente novamente.");
+            }
         }
 
         //RESUME SAFT BUTTON CLICK---------------------------------------------------------------
@@ -228,7 +231,7 @@ namespace saft_sender
                     int saft_file_path_count = ArrayCount(saft_file_path);
                     for (int i = 0; i < saft_file_path_count; i++)
                     {
-                        resume_saft_path[i] = Path.Combine(folderpath, "resumido_" + saft_file_name[i]);
+                        resume_saft_path[i] = Path.Combine(folderpath, saft_file_name[i] + "_resumido.xml");
                         if (saft_file_path_count <= 0)
                         {
                             error_message_box("Deve selecionar um ficheiro saft primeiro!");
@@ -250,8 +253,13 @@ namespace saft_sender
                 {
                     byte[] fileBytes = await client.GetByteArrayAsync(url);
 
+                    string directoryPath = Path.GetDirectoryName(jar_file_path);
+                    if (!Directory.Exists(directoryPath))
+                    {
+                        Directory.CreateDirectory(directoryPath);
+                    }
+
                     File.WriteAllBytes(jar_file_path, fileBytes);
-                    MessageBox.Show("Download do ficheiro efetuada com sucesso!");
                 }
                 catch
                 {

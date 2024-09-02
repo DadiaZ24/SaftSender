@@ -1,7 +1,12 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\diogo\\Desktop\\Personal Work\\saftsenderv1\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\POSTO\\Desktop\\Saft_Sender_private\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F223F901-EAE9-4D26-8B6C-811C202AB0AA}|saft_sender\\saft_sender.csproj|c:\\users\\posto\\desktop\\saft_sender_private\\saft_sender\\saftsenderform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F223F901-EAE9-4D26-8B6C-811C202AB0AA}|saft_sender\\saft_sender.csproj|solutionrelative:saft_sender\\saftsenderform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "saftsenderform.cs",
+              "DocumentMoniker": "C:\\Users\\POSTO\\Desktop\\Saft_Sender_private\\saft_sender\\saftsenderform.cs",
+              "RelativeDocumentMoniker": "saft_sender\\saftsenderform.cs",
+              "ToolTip": "C:\\Users\\POSTO\\Desktop\\Saft_Sender_private\\saft_sender\\saftsenderform.cs",
+              "RelativeToolTip": "saft_sender\\saftsenderform.cs",
+              "ViewState": "AgIAANUAAAAAAAAAAAAlwOoAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-02T10:18:41.261Z",
+              "EditorCaption": ""
             }
           ]
         }
