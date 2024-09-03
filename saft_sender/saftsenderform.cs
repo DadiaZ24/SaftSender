@@ -36,6 +36,7 @@ namespace saft_sender
             {
                 this.year_combobox.Items.Add(selectyear.ToString());
             }
+            jar_download();
         }
 
         //error message box format create
@@ -119,7 +120,6 @@ namespace saft_sender
                     error_message_box("Não selecionou nenhum ficheiro saft!");
                     return;
                 }
-                jar_download();
                 if (string.IsNullOrEmpty(jar_file_path))
                 {
                     return;
@@ -171,14 +171,7 @@ namespace saft_sender
                             }
                             else
                             {
-                                nif_txtbox.Text = null;
-                                pass_txtbox.Text = null;
-                                for (int n = 0; n < saft_file_path_count; n++)
-                                {
-                                    saft_file_path[n] = null;
-                                    saft_file_name[n] = null;
-                                }
-                                abrirsaft_path = null;
+                                ClearAllFields();
                             }
                         }
                     }
@@ -194,6 +187,19 @@ namespace saft_sender
             }
 
 
+        }
+
+        private void ClearAllFields()
+        {
+            nif_txtbox.Text = "";
+            pass_txtbox.Text = "";
+
+            saft_file_path = new string[99];
+            saft_file_name = new string[99];
+            resume_saft_path = new string[99];
+
+            abrirsaft_path.Text = "";
+            status = new string[99];
         }
 
         //DOWNLOAD JAR BUTTON --------------------------------------------------------------------------------
