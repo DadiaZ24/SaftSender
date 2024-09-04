@@ -57,7 +57,7 @@ namespace saft_sender
             if (!string.IsNullOrEmpty(resume_saft_path[0]))
             {
                 for (int j = 0; j < resume_saft_path.Length; j++)
-                    resume_saft_path[j] = null;
+                    resume_saft_path[j] = "";
             }
 
             var saftpath_dialog = opensaft_dialog.ShowDialog();
@@ -84,6 +84,10 @@ namespace saft_sender
                             abrirsaft_path.Text = saftfile_display;
                             saft_file_name[i] = Path.GetFileName(saft_file_path[i]);
                         }
+                        if (!string.IsNullOrEmpty(resume_path.Text))
+                        {
+                            resume_saft_path[i] = Path.Combine(resume_path.Text, saft_file_name[i] + "_resumido.xml");
+                        }
                     }
                     else
                     {
@@ -97,7 +101,7 @@ namespace saft_sender
         }
 
         //submit button Code
-        private void submit_button_Click(object sender, EventArgs e)
+        private async void submit_button_Click(object sender, EventArgs e)
         {
             string nif = nif_txtbox.Text;
             string password = pass_txtbox.Text;
@@ -154,6 +158,7 @@ namespace saft_sender
                         string output = process.StandardOutput.ReadToEnd();
                         string error = process.StandardError.ReadToEnd();
                         process.WaitForExit();
+                        await Task.Delay(2000);
                         if (!string.IsNullOrEmpty(error))
                         {
                             if (errorParser(error, i) == true)
@@ -177,8 +182,6 @@ namespace saft_sender
                     }
 
                 }
-                string terminus_message = string.Join(Environment.NewLine, status.Where(s => s != null));
-                MessageBox.Show(terminus_message, "Informação de Envio:", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
@@ -383,9 +386,10 @@ namespace saft_sender
             }
             else if (error.Contains("<response code=\"200\">"))
             {
-                status[saftnbr] = $"Saft \"{saft_file_name[saftnbr]}\" enviado com sucesso!";
+                MessageBox.Show($"Saft \"{saft_file_name[saftnbr]}\" enviado com sucesso!", "Enviado com sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
+            MessageBox.Show("NAO ENTREI EM NADA!");
             return false;
         }
 
