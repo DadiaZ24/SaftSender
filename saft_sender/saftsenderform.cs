@@ -158,13 +158,13 @@ namespace saft_sender
                         string output = process.StandardOutput.ReadToEnd();
                         string error = process.StandardError.ReadToEnd();
                         process.WaitForExit();
-                        await Task.Delay(2000);
+                        process.Close();
+                        await Task.Delay(100);
                         if (!string.IsNullOrEmpty(error))
                         {
                             if (errorParser(error, i) == true)
                             {
                                 error_message_box(status[i]);
-                                continue;
                             }
                         }
                         else if (!string.IsNullOrEmpty(output))
@@ -172,16 +172,14 @@ namespace saft_sender
                             if (errorParser(output, i) == true)
                             {
                                 error_message_box(status[i]);
-                                continue;
-                            }
-                            else
-                            {
-                                ClearAllFields();
                             }
                         }
                     }
-
+                    
                 }
+                string terminusMessage = string.Join(Environment.NewLine, status.Where(s => s != null));
+                MessageBox.Show(terminusMessage, "Resumo de envio:", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearAllFields();
 
             }
             catch (Exception ex)
@@ -322,6 +320,7 @@ namespace saft_sender
             }
         }
         //Parsing errors ----------------------------------------------------------------------
+        
         private bool errorParser(string error, int saftnbr)
         {
             if (error.Contains("<response code=\"-1\">"))
@@ -336,7 +335,7 @@ namespace saft_sender
             }
             else if (error.Contains("<response code=\"-3\">"))
             {
-                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": Mensagem específica da validação que não está a ser respeitada.";
+                status[saftnbr] = $"Erro no saft \"{saft_file_name[saftnbr]}\": Mensagem específica da validação que não está a ser respeitada. Verifique se o saft contém entradas de valor!";
                 return true;
             }
             else if (error.Contains("<response code=\"-4\">"))
@@ -386,10 +385,9 @@ namespace saft_sender
             }
             else if (error.Contains("<response code=\"200\">"))
             {
-                MessageBox.Show($"Saft \"{saft_file_name[saftnbr]}\" enviado com sucesso!", "Enviado com sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                status[saftnbr] = $"Saft \"{saft_file_name[saftnbr]}\" enviado com sucesso!";
                 return false;
             }
-            MessageBox.Show("NAO ENTREI EM NADA!");
             return false;
         }
 
