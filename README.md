@@ -1,8 +1,16 @@
+<div align=center>
+
 # Saft Sender
+
+</div>
 
 ![Saft Sender logo](https://i.imgur.com/y2vYuSn.png)
 
+<div align=center>
+
 ## ![Portuguese Flag](https://github.com/madebybowtie/FlagKit/raw/master/Assets/PNG/PT@2x.png?raw=true) Portuguese Version
+
+</div>
 
 ### 🚀 Sobre
 
@@ -31,7 +39,11 @@ Interessado no meu trabalho? Tens dúvidas em relação ao funcionamento do prog
 GitHub: @DadiaZ24<p>
 Email: diogo-uds@hotmail.com
 
+<div align=center>
+
 ## ![English Flag](https://github.com/madebybowtie/FlagKit/raw/master/Assets/PNG/GB@2x.png?raw=true) English Version
+
+</div>
 
 ### 🚀 Overview
 
